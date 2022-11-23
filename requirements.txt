@@ -1,4 +1,4 @@
-pandas
+pandas >= 1.5.1
 numpy
 ipykernel
 pathlib
@@ -12,5 +12,5 @@ requests
 pdfplumber
 top2vec[sentence_encoders]
 #top2vec[sentence_transformers]
-torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+#torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
 tqdm
