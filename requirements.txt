@@ -11,6 +11,6 @@ pyarrow
 requests
 pdfplumber
 top2vec[sentence_encoders]
-#top2vec[sentence_transformers]
+top2vec[sentence_transformers]
 #torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
 tqdm
