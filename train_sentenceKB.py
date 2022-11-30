@@ -9,28 +9,29 @@ from transformers import AutoTokenizer
 # Customize logger
 #############################################################################################
 logger = logging.getLogger('Train sentence-bert')
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.INFO)
 sh = logging.StreamHandler()
 sh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
 logger.addHandler(sh)
 #############################################################################################
 
 PATH_TO_DATA = Path('data')
-INDATA = 'data.pkl'
+INDATA = 'data_deldoks.pkl'
 
 df=pd.read_pickle(PATH_TO_DATA / INDATA)
-df=df.reset_index()
+# df=df.reset_index()
 
 # Load model
+logger.info('Downloading SentenceTransformer')
 sentence_model = SentenceTransformer('KBLab/sentence-bert-swedish-cased').encode
 # Load tokenizer
 
 tokenizer = AutoTokenizer.from_pretrained('KBLab/sentence-bert-swedish-cased').tokenize
-model = Top2Vec(df['text'].values, split_documents=False, embedding_model=sentence_model, use_embedding_model_tokenizer=True, tokenizer=tokenizer)
+model = Top2Vec(df['dokdelar'].values, split_documents=False, embedding_model=sentence_model, use_embedding_model_tokenizer=True, tokenizer=tokenizer)
 
-model_path=r"models\Modell_sbertKB_titel.mod"
+model_path=r"models\Modell_sbertKB_deldok.mod"
 model.save(model_path)
 
 logger.info('Done!')
-logger.info('Model saved to', model_path)
-logger.info('Metadata can be found in:', str(PATH_TO_DATA / INDATA))
+logger.info(f'Model saved to {model_path}')
+logger.info(f'Metadata can be found in: {str(PATH_TO_DATA / INDATA)}')
