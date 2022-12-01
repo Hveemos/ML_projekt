@@ -9,7 +9,7 @@ from transformers import AutoTokenizer
 # Customize logger
 #############################################################################################
 logger = logging.getLogger('Train sentence-bert')
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.INFO)
 sh = logging.StreamHandler()
 sh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
 logger.addHandler(sh)
@@ -32,5 +32,5 @@ model_path=r"models\Modell_sbertKB_titel.mod"
 model.save(model_path)
 
 logger.info('Done!')
-logger.info('Model saved to', model_path)
-logger.info('Metadata can be found in:', str(PATH_TO_DATA / INDATA))
+logger.info(f'Model saved to {model_path}')
+logger.info(f'Metadata can be found in: {str(PATH_TO_DATA / INDATA)}')
