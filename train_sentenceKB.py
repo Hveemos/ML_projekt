@@ -27,7 +27,8 @@ sentence_model = SentenceTransformer('KBLab/sentence-bert-swedish-cased').encode
 # Load tokenizer
 
 tokenizer = AutoTokenizer.from_pretrained('KBLab/sentence-bert-swedish-cased').tokenize
-model = Top2Vec(df['dokdelar'].values, split_documents=False, embedding_model=sentence_model, use_embedding_model_tokenizer=True, tokenizer=tokenizer)
+#df.loc[~df['rm'].isin(['2014/15','2015/16','2015','2016']),'dokdelar']
+model = Top2Vec(df['dokdelar'].values, split_documents=False, embedding_model=sentence_model, use_embedding_model_tokenizer=True, tokenizer=tokenizer, workers=8)
 
 model_path=r"models\Modell_sbertKB_deldok.mod"
 model.save(model_path)
