@@ -17,6 +17,7 @@ logger.addHandler(sh)
 
 PATH_TO_DATA = Path('data')
 INDATA = 'data_deldoks.pkl'
+N_TOPICS=32 #Number of topics
 
 df=pd.read_pickle(PATH_TO_DATA / INDATA)
 # df=df.reset_index()
@@ -28,9 +29,14 @@ sentence_model = SentenceTransformer('KBLab/sentence-bert-swedish-cased').encode
 
 tokenizer = AutoTokenizer.from_pretrained('KBLab/sentence-bert-swedish-cased').tokenize
 #df.loc[~df['rm'].isin(['2014/15','2015/16','2015','2016']),'dokdelar']
-model = Top2Vec(df['dokdelar'].values, split_documents=False, embedding_model=sentence_model, use_embedding_model_tokenizer=True, tokenizer=tokenizer, workers=8)
+model = Top2Vec(df['dokdelar'].values, document_ids=df.index.to_list(), split_documents=False, embedding_model=sentence_model, use_embedding_model_tokenizer=True, tokenizer=tokenizer, workers=8)
 
 model_path=r"models\Modell_sbertKB_deldok.mod"
+
+# Reduce number of topics to N_TOPICS
+logger.info('Reduce number of topics')
+model.hierarchical_topic_reduction(N_TOPICS)
+
 model.save(model_path)
 
 logger.info('Done!')
