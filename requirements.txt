@@ -1,6 +1,7 @@
 pandas >= 1.5.1
 numpy
 ipykernel
+ipywidgets>=7.0,<8.0
 pathlib
 matplotlib
 seaborn
@@ -9,6 +10,6 @@ gensim
 pyarrow
 #spacy
 requests
-top2vec[sentence_transformers]
+top2vec[sentence_transformers, index]
 #torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
 tqdm
